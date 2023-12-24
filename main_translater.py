@@ -1,19 +1,19 @@
-from fastapi import FastAPI
-from transformers import pipeline
-from pydantic import BaseModel
+from fastapi import FastAPI   #Импорт fastapi 
+from transformers import pipeline   # импорт пайплайн для обращения к библиотеке преодученных моделей Hugg Face
+from pydantic import BaseModel    # импорт ограничителя ввода данных
 
-class Item (BaseModel):
+class Item(BaseModel):   # ограничение ввода данных - только строка
     text: str
 
-app = FastAPI() #Создаем объект app
-translator = pipeline ('translation',"Helsinki-NLP/opus-mt-en-ru")
+app = FastAPI()   # присвоение переменной класса FastAPI
+translator = pipeline(task ='translation', #  вызов задачи и  модели из библиотеки
+    model = 'Helsinki-NLP/opus-mt-en-ru')
 
-@app.get ("/")
-def root ():
-    return {"Message": "Translator is ready"}
+@app.get("/")  # Что делать при обращении в корень
+def root():
+    return {"message": "Hello World"}
 
-@app.post ("/predict/")
-def predict (item, Item):
-    return translator (item.text)[0]
-
+@app.post("/predict/")  # Что делать при обращении в каталог predict
+def predict(item: Item):
+    return translator (item.text )[0]
 
