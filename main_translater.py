@@ -6,7 +6,7 @@ class Item (BaseModel):
     text: str
 
 app = FastAPI() #Создаем объект app
-translator = pipeline ("Helsinki-NLP/opus-mt-en-ru")
+translator = pipeline ('translation',"Helsinki-NLP/opus-mt-en-ru")
 
 @app.get ("/")
 def root ():
@@ -14,6 +14,6 @@ def root ():
 
 @app.post ("/predict/")
 def predict (item, Item):
-    return traslator (item.text)[0]
+    return translator (item.text)[0]
 
 
