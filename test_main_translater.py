@@ -1,16 +1,16 @@
-from fastapi.testclient import TestClient
-from main import app
+from fastapi.testclient import TestClient #Импорт тест-клиента
+from main_translater import app           #Импорт объекта арр из файла main
 
-client = TestClient(app)
+client = TestClient(app)  #Создание клиента тестирования
 
 
-def test_read_main():
+def test_read_main():   # Функция проверки ответа на гет-запрос в корневой каталог
     response = client.get("/")
     assert response.status_code == 200
     assert response.json() == {"message": "Hello World"}
 
 
-def test_predict_1():
+def test_predict_1():   # Функция проверки ответа на пост-запрос варианта перевода
     response = client.post("/predict/",
                            json={"text": "I like machine learning!"})
     json_data = response.json()
@@ -18,9 +18,9 @@ def test_predict_1():
     assert json_data['label'] == 'Я люблю машинное обучение!'
 
 
-def test_predict_2():
+def test_predict_2(): # Функция проверки ответа на пост-запрос другого варианта перевода
     response = client.post("/predict/",
                            json={"text": "We hate testing!"})
     json_data = response.json()
     assert response.status_code == 200
-    assert json_data['label'] == 'Мы ненавидим тестирование!'
+    assert json_data['label'] == 'Мы ненавидим тесты!'
