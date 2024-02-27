@@ -21,7 +21,7 @@ def test_predict_1():  # Функция проверки ответа на по�
 
 def test_predict_2():  # Функция проверки ответа на пост - запрос друг варианта
     response = client.post("/predict/",
-                           json = {"text": "We hate testing!"})
+                           json={"text": "We hate testing!"})
     json_data = response.json()
     assert response.status_code == 200
     assert json_data['translation_text'] == 'Мы ненавидим тесты!'
