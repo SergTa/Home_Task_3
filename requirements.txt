@@ -6,4 +6,6 @@ uvicorn
 transformers
 torch
 
+flake8
+
 
