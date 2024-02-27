@@ -5,14 +5,14 @@ client = TestClient(app)  #Создание клиента тестирован�
 
 
 def test_read_main():# Функция проверки ответа на гет - запрос в корне
-    response = client.get(" / ")
+    response = client.get("/")
     assert response.status_code == 200
     assert response.json() == {"message": "Hello World"}
 
 
 def test_predict_1():# Функция проверки ответа на пост - запрос варианта 
     response = client.post(
-        " / predict / ", 
+        "/predict/", 
         json = {"text": "I like machine learning!"})
     json_data = response.json()
     assert response.status_code == 200
@@ -20,7 +20,7 @@ def test_predict_1():# Функция проверки ответа на пос�
 
 
 def test_predict_2():# Функция проверки ответа на пост - запрос друг варианта
-    response = client.post(" / predict / ",
+    response = client.post("/predict/",
         json = {"text": "We hate testing!"})
     json_data = response.json()
     assert response.status_code == 200
