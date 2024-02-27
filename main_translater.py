@@ -8,8 +8,8 @@ class Item(BaseModel):  # ограничение ввода данных - то�
 
 
 app = FastAPI()  # присвоение переменной класса FastAPI
-translator=pipeline(task='translation',  # вызов задачи и модели из библ
-    model='Helsinki-NLP/opus-mt-en-ru')
+translator = pipeline(task='translation',  # вызов задачи и модели из библ
+                      model='Helsinki-NLP/opus-mt-en-ru')
 
 
 @app.get("/")  # Что делать при обращении в корень
